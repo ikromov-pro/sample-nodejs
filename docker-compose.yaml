@@ -1,19 +1,14 @@
 services:
-  app:
-    image: registry.digitalocean.com/devops-kurs-registry/my-node-app:1.0.1
-#    build: .
-    ports:
-      - "3000:3000"
+  app: 
+    build: .
+    # ports:
+    #   - "3000:3000"
     restart: unless-stopped
-    volumes:
-      - app_data:/opt/app/storage
     environment:
-      POSTGRES_HOST: db
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-    deploy:
-      replicas: 3
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379  
   db:
     image: postgres:15.13-alpine3.21
     ports:
@@ -23,12 +18,12 @@ services:
       POSTGRES_PASSWORD: "mysecretpassword"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
   redis:
     image: redis:7.2.8-alpine3.21
-#    ports:
-#      - "6379:6379"
+    # ports:
+    #   - "6379:6379"
     restart: unless-stopped
 
 volumes:
   pgdata:
-  app_data:
