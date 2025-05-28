@@ -1,6 +1,7 @@
 services:
-  app: 
-    build: .
+  app:
+    image: registry.digitalocean.com/ikromov-devops-registry/my-node-app:1.0.1
+    # build: .
     # ports:
     #   - "3000:3000"
     restart: unless-stopped
